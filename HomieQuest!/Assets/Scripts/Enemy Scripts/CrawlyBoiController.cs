@@ -16,21 +16,27 @@ public class CrawlyBoiController : MonoBehaviour, EnemyLifeform {
 
     private Rigidbody2D rigidBody;
     private SpriteRenderer sprite;
-    // Start is called before the first frame update
-    void Start()
-    {
-        health = maxHealth;
+
+    void Awake() {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void FixedUpdate()
-    {
+    void Start() {
+        health = maxHealth;
+    }
+
+    void OnDestroy() {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void FixedUpdate() {
         rigidBody.AddForce(dir * speed);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null) // If collision is player
         {
@@ -39,14 +45,12 @@ public class CrawlyBoiController : MonoBehaviour, EnemyLifeform {
         }
     }
 
-    public void HitEnemy(float damage, Vector2 knockbackDirection, float knockbackForce)
-    {
+    public void HitEnemy(float damage, Vector2 knockbackDirection, float knockbackForce) {
         rigidBody.AddForce(knockbackDirection * knockbackForce * knockbackMod);
         TakeDamage(damage);
     }
 
-    public void HitWall(float col)
-    {
+    public void HitWall(float col) {
         if (col > 0) // Hit on right
         { // Turn left
             sprite.flipX = false;
@@ -58,12 +62,17 @@ public class CrawlyBoiController : MonoBehaviour, EnemyLifeform {
         }
     }
 
-    private void TakeDamage(float damage)
-    {
+    private void TakeDamage(float damage) {
         health -= damage;
         if (health <= 0) // Die
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnGameStateChanged(GameState newGameState) {
+        GetComponent<Animator>().enabled = newGameState == GameState.Gaming;
+        rigidBody.simulated = newGameState == GameState.Gaming;
+        enabled = newGameState == GameState.Gaming;
     }
 }

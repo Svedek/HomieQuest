@@ -18,28 +18,22 @@ public class PlayerSwingChecker : MonoBehaviour {
         collider2d = gameObject.GetComponent<CircleCollider2D>();
     }
 
-    private void FixedUpdate()
-    {
-        if (swingTimer > 0)
-        {
-            if (--swingTimer <= 0) // Decrement + If was final frame of swing
-            {
+    private void FixedUpdate() {
+        if (swingTimer > 0) {
+            if (--swingTimer <= 0) { // Decrement + If was final frame of swing
                 EndSwing();
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision) {
         EnemyLifeform enemy = collision.gameObject.GetComponent<EnemyLifeform>();
-        if (enemy != null || collision.gameObject.layer == 9)
-        {
+        if (enemy != null || collision.gameObject.layer == 9) {
             player.SwingConnect(enemy, position);
         }
     }
 
-    public void SwingUp()
-    {
+    public void SwingUp() {
         // Set up collision area
         transform.localPosition = YOffset;
         transform.localScale = VSize;
@@ -48,8 +42,7 @@ public class PlayerSwingChecker : MonoBehaviour {
 
         StartSwing();
     }
-    public void SwingDown()
-    {
+    public void SwingDown() {
         // Set up collision area
         transform.localPosition = YOffset * -1;
         transform.localScale = VSize;
@@ -58,8 +51,7 @@ public class PlayerSwingChecker : MonoBehaviour {
 
         StartSwing();
     }
-    public void SwingRight()
-    {
+    public void SwingRight() {
         // Set up collision area
         transform.localPosition = XOffset;
         transform.localScale = HSize;
@@ -68,8 +60,7 @@ public class PlayerSwingChecker : MonoBehaviour {
 
         StartSwing();
     }
-    public void SwingLeft()
-    {
+    public void SwingLeft() {
         // Set up collision area
         transform.localPosition = XOffset * -1;
         transform.localScale = HSize;
@@ -79,14 +70,12 @@ public class PlayerSwingChecker : MonoBehaviour {
         StartSwing();
     }
 
-    private void StartSwing()
-    {
+    private void StartSwing() {
         swingTimer = swingTime;
         collider2d.enabled = true;
     }
 
-    private void EndSwing()
-    {
+    private void EndSwing() {
         collider2d.enabled = false;
     }
 }

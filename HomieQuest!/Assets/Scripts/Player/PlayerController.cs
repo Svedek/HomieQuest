@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-    #region Fields
+public class PlayerController : MonoBehaviour {
+    #region Fields ================================================================================
     // Stats
     [SerializeField] private float playerSpeed = 15f, jumpSpeed = 15f, dashSpeed = 40f, playerGravity = 8f;
     [SerializeField] private float swingDamage = 1f, swingKnockback = 100f;
-    private int maxHealth = 6, health;
+    private int maxHealth = 6, health, lives = 3;
 
     // referances
-    //[SerializeField] ;
     private Rigidbody2D rigidBody;
     private SpriteRenderer spriteRenderer;
     private TrailRenderer trailRenderer;
@@ -22,11 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject chakramPrefab;
 
 
-
+    private PlayerState state = PlayerState.Main;
     [SerializeField] private float chakramOffset;
     private Vector2 moveDir, dashDir;
-    [SerializeField] private int jumpTime = 10, dashTime = 8, dashCooldownBase = 12, swingCooldown = 15, stunTime = 4, invinTime = 12;
-    private int jumpTimer = 0, dashTimer = 0, swingTimer = 0, stunTimer = 0, invinTimer = 0;
+    private Vector3 lastCheckpoint;
+    [SerializeField] private int jumpTime = 10, dashTime = 8, chakramTime = 20, dashCooldownBase = 12, swingCooldown = 15, stunTime = 4, invinTime = 12, respawnTime = 120;
+    private int jumpTimer = 0, dashTimer = 0, chakramTimer = 0, swingTimer = 0, stunTimer = 0, invinTimer = 0, respawnTimer = 0;
     private int dashCooldown = 0;
     private bool grounded = true;
 
@@ -35,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region Unity Methods
+    #region Unity Methods ================================================================================
     private void Awake()
     {
         // Get referances
@@ -43,19 +42,28 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         trailRenderer = gameObject.GetComponent<TrailRenderer>();
         animator = gameObject.GetComponent<Animator>();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
-    void Start()
-    {
+    void Start() {
         // Set UI
         health = maxHealth;
-        UIControl.SetHealthUI(health);
+        UIControl.SetHelthUI(health);
+        UIControl.SetLivesUI(lives);
+
+        // Set checkpoint
+        lastCheckpoint = transform.position;
+    }
+
+    private void OnDestroy() {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (dashTimer <= 0 && stunTimer <= 0) // if not dashing nor stunned
+        if (state == PlayerState.Main) // if not dashing nor stunned
         {
             // Check for Horizontal input
             float hInput = Input.GetAxisRaw("Horizontal");
@@ -72,67 +80,90 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Chakram")) Chakram();
         }
     }
-    private void FixedUpdate()
-    {
-        bool dashing = dashTimer != 0;
-        bool stunned = stunTimer != 0;
+    private void FixedUpdate() {
+        switch (state) {
 
-        if (!dashing && !stunned) // Not dashing nor stunned
-        {
-            rigidBody.velocity = moveDir;
+            case (PlayerState.Main):
+                rigidBody.velocity = moveDir;
 
-            if (jumpTimer > 0)
-            {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
-                --jumpTimer;
-            }
+                if (jumpTimer > 0) {
+                    rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
+                    --jumpTimer;
+                }
 
-            if (dashCooldown > 0) --dashCooldown;
+                if (dashCooldown > 0) --dashCooldown;
+                break;
 
-        } else // Abnormal behaviour - jumpTimer will be set to 0 by causes of below cases or handled within
-        {
-            if (dashing)
-            {
+            case (PlayerState.Dash):
                 rigidBody.velocity = dashDir;
                 if (--dashTimer <= 0) EndDash();
-            }
+                break;
 
-            if (stunned)
-            {
+            case (PlayerState.Stun):
                 if (--stunTimer <= 0) EndStun();
-            }
-        }
+                break;
 
+            case (PlayerState.Dead):
+                if (--respawnTimer <= 0) DeathRespawn();
+                break;
+
+            default:
+                Debug.LogError("PlayerController > FixedUpdate > Unhandled Player State");
+                break;
+        }
 
         if (invinTimer > 0) --invinTimer;
         if (swingTimer > 0) --swingTimer;
+        if (chakramTimer > 0) --chakramTimer;
     }
     #endregion
 
-    #region Public Methods
-    public void HitGround()
-    {
+    #region Public Methods ================================================================================
+        #region pickup/unlock  ========================================
+    public void HealthPickup(int healthGain) {
+        health = Mathf.Min(health + healthGain, maxHealth);
+        UIControl.SetHelthUI(health);
+    }
+    public void HealthMaxPickup() {
+        maxHealth = maxHealth < 21 ? maxHealth + 2 : maxHealth;
+        UIControl.SetHeartsUI(maxHealth/2);
+        UIControl.SetHelthUI(health = maxHealth);
+    }
+    public void LifePickup() {
+        UIControl.SetLivesUI(++lives);
+    }
+    public void DamagePickup(float damageGain) {
+        swingDamage += damageGain;
+    }
+    public void UnlockDash() {
+        dashUnlocked = dashAvailable = true;
+    }
+    public void UnlockChakram() {
+        chakramUnlocked = chakramAvailable = true;
+    }
+    public void UnlockDoubleJump() {
+        doubleJumpUnlocked = doubleJumpAvailable = true;
+    }
+    #endregion
+    public void HitGround() {
         grounded = true;
         dashAvailable = dashUnlocked;
         doubleJumpAvailable = doubleJumpUnlocked;
         animator.SetBool("Grounded", true); // Set animator grounded
     }
 
-    public void LeaveGround()
-    {
+    public void LeaveGround() {
         grounded = false;
         animator.SetBool("Grounded", false); // Set animator grounded
     }
 
     // enemy - the enemy being hit
     // dir - the direction in which the enemy is hit
-    public void SwingConnect(EnemyLifeform enemy, int dir)
-    {
+    public void SwingConnect(EnemyLifeform enemy, int dir) {
         Vector2 KBDir;
 
         // Direction specific actions
-        switch (dir)
-        {
+        switch (dir) {
             case 0: // Right
                 KBDir = Vector2.right;
                 break;
@@ -152,24 +183,22 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        if (enemy != null) // if collision was an enemy, apply damage
-        {
+        if (enemy != null) { // if collision was an enemy, apply damage
             // Apply hit to enemy
             enemy.HitEnemy(swingDamage, KBDir, swingKnockback);
         }
     }
 
-    public void HitPlayer(int damage, Vector2 KBDir, float knockbackForce)
-    {
-        if (invinTimer <= 0)
-        {
+    public void HitPlayer(int damage, Vector2 KBDir, float knockbackForce) {
+        if (state >= PlayerState.Dead) return;
+        if (invinTimer <= 0) {
             // Set Fields
             health -= damage;
             stunTimer = stunTime;
             invinTimer = invinTime;
 
             // Set UI
-            UIControl.SetHealthUI(health);
+            UIControl.SetHelthUI(health);
 
             // Apply Knockback and stun
             Stun();
@@ -180,52 +209,28 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-
-    public void HealthPickup(int healthGain)
-    {
-        health = Mathf.Min(health + healthGain, maxHealth);
-        UIControl.SetHealthUI(health);
-    }
-    public void DamagePickup(float damageGain)
-    {
-        swingDamage += damageGain;
-    }
-    public void UnlockDash()
-    {
-        dashUnlocked = dashAvailable = true;
-    }
-    public void UnlockChakram()
-    {
-        chakramUnlocked = chakramAvailable = true;
-    }
-    /// <summary>
-    /// Called when chakram collides with player,
-    /// </summary>
-    /// <returns> Returns true if player is grounded at collision </returns>
-    public bool ChakramCollide()
-    {
-        if (!grounded)
-        {
+   
+    // Called when chakram collides with player, returns true if player is grounded at collision
+    public bool ChakramCollide() {
+        if (!grounded && state == PlayerState.Main) {
             // bounce
             pogo();
             return false;
         }
         return true;
     }
-    public void ChakramDestroyed()
-    {
+    public void ChakramDestroyed() {
         chakramAvailable = true;
     }
-
-    public void UnlockDoubleJump()
-    {
-        doubleJumpUnlocked = doubleJumpAvailable = true;
+    public void SetCheckpoint(Vector3 newCheckpoint) {
+        lastCheckpoint = newCheckpoint;
     }
     #endregion
 
-    #region Private Methods
+    #region Private Methods ================================================================================
     private void BasicAttack(float vertical)
     {
+        if (state > PlayerState.Main) return;
         if (swingTimer > 0) return; // Don't attack if on cooldown
         if (vertical > 0) // Swing Up
         {
@@ -266,6 +271,7 @@ public class PlayerController : MonoBehaviour
     // Fails if both grounded and doubleJumpAvailable are false
     private void Jump()
     {
+        if (state > PlayerState.Main) return;
         if (grounded) // grounded jump
         {
             jumpTimer = jumpTime;
@@ -280,8 +286,7 @@ public class PlayerController : MonoBehaviour
     // Dashes if dash is available and not on cooldown
     private void Dash()
     {
-        if (dashAvailable && dashCooldown <= 0)
-        {
+        if (dashAvailable && dashCooldown <= 0 && state < PlayerState.Dash) {
             // Get dashDir
             float temp = 1f;
             if (spriteRenderer.flipX) temp = -1f;
@@ -293,7 +298,8 @@ public class PlayerController : MonoBehaviour
             rigidBody.gravityScale = 0;
             jumpTimer = 0;
 
-            // Set and enable trail
+            // Set State and enable trail
+            SetState(PlayerState.Dash);
             trailRenderer.emitting = true;
         }
     }
@@ -304,11 +310,11 @@ public class PlayerController : MonoBehaviour
         dashCooldown = dashCooldownBase;
         rigidBody.gravityScale = playerGravity;
         trailRenderer.emitting = false;
+        ReturnFromState(PlayerState.Dash);
     }
-    private void Chakram()
-    {
-        if (chakramAvailable) 
-        {
+    private void Chakram() {
+        if (state > PlayerState.Main) return;
+        if (chakramTimer <= 0) {
             // dir = direction chakram is being cast
             Vector2 dir = Vector2.left;
             if (spriteRenderer.flipX == false) dir = Vector2.right;
@@ -318,25 +324,53 @@ public class PlayerController : MonoBehaviour
             ChakramController chakram = Instantiate(chakramPrefab, chakramPosition, Quaternion.identity).GetComponent<ChakramController>();
             chakram.InitializeChakram(dir, this);
 
+            chakramTimer = chakramTime;
             chakramAvailable = false;
         }
     }
     private void Stun()
     {
         stunTimer = stunTime;
+        SetState(PlayerState.Stun);
     }
-
     private void EndStun()
     {
-
+        ReturnFromState(PlayerState.Stun);
+    }
+    private void Die() {
+        SetState(PlayerState.Dead);
+        respawnTimer = respawnTime;
+        UIControl.SetLivesUI(--lives);
+    }
+    private void DeathRespawn() {
+        if (lives <= 0) { // Truly perish
+            if (GameStateManager.Instance.CurrentGameState != GameState.Victory) GameStateManager.Instance.SetState(GameState.Lose);
+        } else { // Kind of perish
+            Respawn();
+        }
+    }
+    private void Respawn() {
+        transform.position = lastCheckpoint;
+        health = maxHealth;
+        UIControl.SetHelthUI(health);
+        state = PlayerState.Main;
     }
 
-    private void Die()
-    {
-        // stun and respawn?
-        // reload level?
-        // boot to menu?
+    // If target is of greater priority than state, set state to target
+    private void SetState(PlayerState target) {
+        if (state < target) state = target;
+    }
+    // If state and target match, sets state to Main
+    private void ReturnFromState(PlayerState target) {
+        if (state == target) state = PlayerState.Main;
     }
     #endregion
 
+    #region Not fully sure ================================================================================
+    private void OnGameStateChanged(GameState newGameState) {
+        animator.enabled = newGameState == GameState.Gaming;
+        rigidBody.simulated = newGameState == GameState.Gaming;
+        enabled = newGameState == GameState.Gaming;
+    }
+    #endregion
 }
