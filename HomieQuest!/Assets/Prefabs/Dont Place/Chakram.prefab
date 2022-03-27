@@ -139,7 +139,7 @@ MonoBehaviour:
   knockback: 0
   velocity: 20
   turnDistance: -1
-  maxDistance: 40
+  maxDistance: 50
 --- !u!95 &2676201248324600238
 Animator:
   serializedVersion: 3

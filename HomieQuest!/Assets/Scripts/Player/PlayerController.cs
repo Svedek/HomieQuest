@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float chakramOffset;
     private Vector2 moveDir, dashDir;
     private Vector3 lastCheckpoint;
-    [SerializeField] private int jumpTime = 10, dashTime = 8, chakramTime = 20, dashCooldownBase = 12, swingCooldown = 15, stunTime = 4, invinTime = 12, respawnTime = 120;
+    [SerializeField] private int dashTime = 8, chakramTime = 20, dashCooldownBase = 12;
+    private int jumpTime = 11, swingCooldown = 15, stunTime = 4, invinTime = 12, respawnTime = 120;
     private int jumpTimer = 0, dashTimer = 0, chakramTimer = 0, swingTimer = 0, stunTimer = 0, invinTimer = 0, respawnTimer = 0;
     private int dashCooldown = 0;
     private bool grounded = true;
@@ -35,8 +36,7 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region Unity Methods ================================================================================
-    private void Awake()
-    {
+    private void Awake() {
         // Get referances
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -47,13 +47,34 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-        // Set UI
+        // Set initial checkpoint
+        lastCheckpoint = transform.position;
+
+        // Load data
+        DataManager.Data data = DataManager.Instance.LoadData();
+        if (data != null) { // if there is data, load it
+            maxHealth = data.maxHp;
+            lives = data.lives;
+            switch (data.powerUps) { // powerUps is 0 through 3
+                case 3:
+                    UnlockDoubleJump();
+                    goto case 2;
+                case 2:
+                    UnlockDash();
+                    goto case 1;
+                case 1:
+                    UnlockChakram();
+                    goto default;
+                default:
+                    break;
+            }
+        }
+
+        // Set health and UI
         health = maxHealth;
         UIControl.SetHelthUI(health);
+        UIControl.SetHeartsUI(maxHealth/2);
         UIControl.SetLivesUI(lives);
-
-        // Set checkpoint
-        lastCheckpoint = transform.position;
     }
 
     private void OnDestroy() {
@@ -214,7 +235,9 @@ public class PlayerController : MonoBehaviour {
     public bool ChakramCollide() {
         if (!grounded && state == PlayerState.Main) {
             // bounce
-            pogo();
+            jumpTimer = Mathf.Max(jumpTime, jumpTimer);
+            dashAvailable = dashUnlocked;
+            doubleJumpAvailable = doubleJumpUnlocked;
             return false;
         }
         return true;
@@ -224,6 +247,16 @@ public class PlayerController : MonoBehaviour {
     }
     public void SetCheckpoint(Vector3 newCheckpoint) {
         lastCheckpoint = newCheckpoint;
+    }
+
+    public void LevelFinish() {
+        int powerUps = 0;
+        if (doubleJumpUnlocked) ++powerUps;
+        if (dashUnlocked) ++powerUps;
+        if (chakramUnlocked) ++powerUps;
+        DataManager.Data newData = new DataManager.Data(-1,maxHealth,lives,powerUps);
+
+        DataManager.Instance.SaveData(newData);
     }
     #endregion
 
@@ -313,7 +346,7 @@ public class PlayerController : MonoBehaviour {
         ReturnFromState(PlayerState.Dash);
     }
     private void Chakram() {
-        if (state > PlayerState.Main) return;
+        if (!chakramAvailable || state > PlayerState.Main) return;
         if (chakramTimer <= 0) {
             // dir = direction chakram is being cast
             Vector2 dir = Vector2.left;

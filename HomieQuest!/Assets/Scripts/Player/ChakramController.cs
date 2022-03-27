@@ -1,20 +1,17 @@
 using UnityEngine;
 
-public class ChakramController : MonoBehaviour
-{
+public class ChakramController : MonoBehaviour {
     [SerializeField] float damage, knockback, velocity;
     [SerializeField] int turnDistance, maxDistance;
 
     private Rigidbody2D rb;
     private PlayerController playerController;
 
-    void Awake()
-    {
+    void Awake() {
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         if (--maxDistance == turnDistance) rb.velocity = rb.velocity * -1;
         if (maxDistance <= 0) DestryChakram();
     }
@@ -31,19 +28,18 @@ public class ChakramController : MonoBehaviour
         }
 
         EnemyLifeform enemy = collision.GetComponent<EnemyLifeform>();
-        if (enemy != null) // Collision was enemy
-        {
+        if (enemy != null) { // Collision was enemy
             enemy.HitEnemy(damage, rb.velocity.normalized, knockback);
-            /* Commented out turn on enemy hit
+            ///* Commented out turn on enemy hit
             if (turnDistance < maxDistance) { // If has not already turned
                 rb.velocity = rb.velocity * -1;
                 turnDistance = maxDistance + 1; // Turn distance is set to greater than the remaining distance so no more turns will happen 
             }
-            */
+            //*/
             return;
         }
 
-        if (collision.gameObject.layer == 8 || collision.gameObject.layer == 9) { // If collision was Terrain
+        if (collision.gameObject.layer == 8) { // If collision was Terrain
             if (turnDistance < maxDistance) { // If has not already turned
                 rb.velocity = rb.velocity * -1;
                 turnDistance = maxDistance + 1; // Turn distance is set to greater than the remaining distance so no more turns will happen 
