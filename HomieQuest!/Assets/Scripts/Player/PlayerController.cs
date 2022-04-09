@@ -245,8 +245,10 @@ public class PlayerController : MonoBehaviour {
     public void ChakramDestroyed() {
         chakramAvailable = true;
     }
-    public void SetCheckpoint(Vector3 newCheckpoint) {
+    public bool SetCheckpoint(Vector3 newCheckpoint) { // returns true if checkpoint was set to new location
+        bool ret = newCheckpoint != lastCheckpoint;
         lastCheckpoint = newCheckpoint;
+        return ret;
     }
 
     public void LevelFinish() {

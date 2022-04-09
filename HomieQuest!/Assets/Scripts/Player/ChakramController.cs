@@ -30,12 +30,12 @@ public class ChakramController : MonoBehaviour {
         EnemyLifeform enemy = collision.GetComponent<EnemyLifeform>();
         if (enemy != null) { // Collision was enemy
             enemy.HitEnemy(damage, rb.velocity.normalized, knockback);
-            ///* Commented out turn on enemy hit
+            /* Commented out turn on enemy hit
             if (turnDistance < maxDistance) { // If has not already turned
                 rb.velocity = rb.velocity * -1;
                 turnDistance = maxDistance + 1; // Turn distance is set to greater than the remaining distance so no more turns will happen 
             }
-            //*/
+            */
             return;
         }
 
