@@ -331,8 +331,8 @@ TextureImporter:
       name: Factory_Tileset_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 72
+        x: 1
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -352,8 +352,8 @@ TextureImporter:
       name: Factory_Tileset_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 72
+        x: 11
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -373,8 +373,8 @@ TextureImporter:
       name: Factory_Tileset_2
       rect:
         serializedVersion: 2
-        x: 16
-        y: 72
+        x: 21
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -394,8 +394,8 @@ TextureImporter:
       name: Factory_Tileset_3
       rect:
         serializedVersion: 2
-        x: 24
-        y: 72
+        x: 31
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -421,8 +421,8 @@ TextureImporter:
       name: Factory_Tileset_4
       rect:
         serializedVersion: 2
-        x: 32
-        y: 72
+        x: 41
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -450,8 +450,8 @@ TextureImporter:
       name: Factory_Tileset_5
       rect:
         serializedVersion: 2
-        x: 40
-        y: 72
+        x: 51
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -477,8 +477,8 @@ TextureImporter:
       name: Factory_Tileset_6
       rect:
         serializedVersion: 2
-        x: 48
-        y: 72
+        x: 61
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -502,8 +502,8 @@ TextureImporter:
       name: Factory_Tileset_7
       rect:
         serializedVersion: 2
-        x: 56
-        y: 72
+        x: 71
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -527,8 +527,8 @@ TextureImporter:
       name: Factory_Tileset_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 72
+        x: 81
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -552,8 +552,8 @@ TextureImporter:
       name: Factory_Tileset_9
       rect:
         serializedVersion: 2
-        x: 72
-        y: 72
+        x: 91
+        y: 91
         width: 8
         height: 8
       alignment: 0
@@ -577,8 +577,8 @@ TextureImporter:
       name: Factory_Tileset_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
+        x: 1
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -598,8 +598,8 @@ TextureImporter:
       name: Factory_Tileset_11
       rect:
         serializedVersion: 2
-        x: 8
-        y: 64
+        x: 11
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -619,8 +619,8 @@ TextureImporter:
       name: Factory_Tileset_12
       rect:
         serializedVersion: 2
-        x: 16
-        y: 64
+        x: 21
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -640,8 +640,8 @@ TextureImporter:
       name: Factory_Tileset_13
       rect:
         serializedVersion: 2
-        x: 24
-        y: 64
+        x: 31
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -665,8 +665,8 @@ TextureImporter:
       name: Factory_Tileset_14
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
+        x: 41
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -686,8 +686,8 @@ TextureImporter:
       name: Factory_Tileset_15
       rect:
         serializedVersion: 2
-        x: 40
-        y: 64
+        x: 51
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -711,8 +711,8 @@ TextureImporter:
       name: Factory_Tileset_16
       rect:
         serializedVersion: 2
-        x: 48
-        y: 64
+        x: 61
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -736,8 +736,8 @@ TextureImporter:
       name: Factory_Tileset_17
       rect:
         serializedVersion: 2
-        x: 56
-        y: 64
+        x: 71
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -761,8 +761,8 @@ TextureImporter:
       name: Factory_Tileset_18
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
+        x: 81
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -786,8 +786,8 @@ TextureImporter:
       name: Factory_Tileset_19
       rect:
         serializedVersion: 2
-        x: 72
-        y: 64
+        x: 91
+        y: 81
         width: 8
         height: 8
       alignment: 0
@@ -807,8 +807,8 @@ TextureImporter:
       name: Factory_Tileset_20
       rect:
         serializedVersion: 2
-        x: 0
-        y: 56
+        x: 1
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -828,8 +828,8 @@ TextureImporter:
       name: Factory_Tileset_21
       rect:
         serializedVersion: 2
-        x: 8
-        y: 56
+        x: 11
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -849,8 +849,8 @@ TextureImporter:
       name: Factory_Tileset_22
       rect:
         serializedVersion: 2
-        x: 16
-        y: 56
+        x: 21
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -876,8 +876,8 @@ TextureImporter:
       name: Factory_Tileset_23
       rect:
         serializedVersion: 2
-        x: 24
-        y: 56
+        x: 31
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -901,8 +901,8 @@ TextureImporter:
       name: Factory_Tileset_24
       rect:
         serializedVersion: 2
-        x: 32
-        y: 56
+        x: 41
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -928,8 +928,8 @@ TextureImporter:
       name: Factory_Tileset_25
       rect:
         serializedVersion: 2
-        x: 40
-        y: 56
+        x: 51
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -949,8 +949,8 @@ TextureImporter:
       name: Factory_Tileset_26
       rect:
         serializedVersion: 2
-        x: 48
-        y: 56
+        x: 61
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -970,8 +970,8 @@ TextureImporter:
       name: Factory_Tileset_27
       rect:
         serializedVersion: 2
-        x: 56
-        y: 56
+        x: 71
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -991,8 +991,8 @@ TextureImporter:
       name: Factory_Tileset_28
       rect:
         serializedVersion: 2
-        x: 64
-        y: 56
+        x: 81
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -1012,8 +1012,8 @@ TextureImporter:
       name: Factory_Tileset_29
       rect:
         serializedVersion: 2
-        x: 72
-        y: 56
+        x: 91
+        y: 71
         width: 8
         height: 8
       alignment: 0
@@ -1033,8 +1033,8 @@ TextureImporter:
       name: Factory_Tileset_30
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
+        x: 1
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1054,8 +1054,8 @@ TextureImporter:
       name: Factory_Tileset_31
       rect:
         serializedVersion: 2
-        x: 8
-        y: 48
+        x: 11
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1075,8 +1075,8 @@ TextureImporter:
       name: Factory_Tileset_32
       rect:
         serializedVersion: 2
-        x: 16
-        y: 48
+        x: 21
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1096,8 +1096,8 @@ TextureImporter:
       name: Factory_Tileset_33
       rect:
         serializedVersion: 2
-        x: 24
-        y: 48
+        x: 31
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1117,8 +1117,8 @@ TextureImporter:
       name: Factory_Tileset_34
       rect:
         serializedVersion: 2
-        x: 32
-        y: 48
+        x: 41
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1142,8 +1142,8 @@ TextureImporter:
       name: Factory_Tileset_35
       rect:
         serializedVersion: 2
-        x: 40
-        y: 48
+        x: 51
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1163,8 +1163,8 @@ TextureImporter:
       name: Factory_Tileset_36
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
+        x: 61
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1184,8 +1184,8 @@ TextureImporter:
       name: Factory_Tileset_37
       rect:
         serializedVersion: 2
-        x: 56
-        y: 48
+        x: 71
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1209,8 +1209,8 @@ TextureImporter:
       name: Factory_Tileset_38
       rect:
         serializedVersion: 2
-        x: 64
-        y: 48
+        x: 81
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1234,8 +1234,8 @@ TextureImporter:
       name: Factory_Tileset_39
       rect:
         serializedVersion: 2
-        x: 72
-        y: 48
+        x: 91
+        y: 61
         width: 8
         height: 8
       alignment: 0
@@ -1255,8 +1255,8 @@ TextureImporter:
       name: Factory_Tileset_40
       rect:
         serializedVersion: 2
-        x: 0
-        y: 40
+        x: 1
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1276,8 +1276,8 @@ TextureImporter:
       name: Factory_Tileset_41
       rect:
         serializedVersion: 2
-        x: 8
-        y: 40
+        x: 11
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1297,8 +1297,8 @@ TextureImporter:
       name: Factory_Tileset_42
       rect:
         serializedVersion: 2
-        x: 16
-        y: 40
+        x: 21
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1318,8 +1318,8 @@ TextureImporter:
       name: Factory_Tileset_43
       rect:
         serializedVersion: 2
-        x: 24
-        y: 40
+        x: 31
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1339,8 +1339,8 @@ TextureImporter:
       name: Factory_Tileset_44
       rect:
         serializedVersion: 2
-        x: 32
-        y: 40
+        x: 41
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1364,8 +1364,8 @@ TextureImporter:
       name: Factory_Tileset_45
       rect:
         serializedVersion: 2
-        x: 40
-        y: 40
+        x: 51
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1389,8 +1389,8 @@ TextureImporter:
       name: Factory_Tileset_46
       rect:
         serializedVersion: 2
-        x: 48
-        y: 40
+        x: 61
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1410,8 +1410,8 @@ TextureImporter:
       name: Factory_Tileset_47
       rect:
         serializedVersion: 2
-        x: 56
-        y: 40
+        x: 71
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1435,8 +1435,8 @@ TextureImporter:
       name: Factory_Tileset_48
       rect:
         serializedVersion: 2
-        x: 64
-        y: 40
+        x: 81
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1460,8 +1460,8 @@ TextureImporter:
       name: Factory_Tileset_49
       rect:
         serializedVersion: 2
-        x: 72
-        y: 40
+        x: 91
+        y: 51
         width: 8
         height: 8
       alignment: 0
@@ -1486,8 +1486,8 @@ TextureImporter:
       name: Factory_Tileset_50
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 1
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1511,8 +1511,8 @@ TextureImporter:
       name: Factory_Tileset_51
       rect:
         serializedVersion: 2
-        x: 8
-        y: 32
+        x: 11
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1537,8 +1537,8 @@ TextureImporter:
       name: Factory_Tileset_52
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
+        x: 21
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1558,8 +1558,8 @@ TextureImporter:
       name: Factory_Tileset_53
       rect:
         serializedVersion: 2
-        x: 24
-        y: 32
+        x: 31
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1579,8 +1579,8 @@ TextureImporter:
       name: Factory_Tileset_54
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 41
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1604,8 +1604,8 @@ TextureImporter:
       name: Factory_Tileset_55
       rect:
         serializedVersion: 2
-        x: 40
-        y: 32
+        x: 51
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1629,8 +1629,8 @@ TextureImporter:
       name: Factory_Tileset_56
       rect:
         serializedVersion: 2
-        x: 48
-        y: 32
+        x: 61
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1650,8 +1650,8 @@ TextureImporter:
       name: Factory_Tileset_57
       rect:
         serializedVersion: 2
-        x: 56
-        y: 32
+        x: 71
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1671,8 +1671,8 @@ TextureImporter:
       name: Factory_Tileset_58
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
+        x: 81
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1692,8 +1692,8 @@ TextureImporter:
       name: Factory_Tileset_59
       rect:
         serializedVersion: 2
-        x: 72
-        y: 32
+        x: 91
+        y: 41
         width: 8
         height: 8
       alignment: 0
@@ -1713,8 +1713,8 @@ TextureImporter:
       name: Factory_Tileset_60
       rect:
         serializedVersion: 2
-        x: 0
-        y: 24
+        x: 1
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1734,8 +1734,8 @@ TextureImporter:
       name: Factory_Tileset_61
       rect:
         serializedVersion: 2
-        x: 8
-        y: 24
+        x: 11
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1755,8 +1755,8 @@ TextureImporter:
       name: Factory_Tileset_62
       rect:
         serializedVersion: 2
-        x: 16
-        y: 24
+        x: 21
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1776,8 +1776,8 @@ TextureImporter:
       name: Factory_Tileset_63
       rect:
         serializedVersion: 2
-        x: 24
-        y: 24
+        x: 31
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1797,8 +1797,8 @@ TextureImporter:
       name: Factory_Tileset_64
       rect:
         serializedVersion: 2
-        x: 32
-        y: 24
+        x: 41
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1822,8 +1822,8 @@ TextureImporter:
       name: Factory_Tileset_65
       rect:
         serializedVersion: 2
-        x: 40
-        y: 24
+        x: 51
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1847,8 +1847,8 @@ TextureImporter:
       name: Factory_Tileset_66
       rect:
         serializedVersion: 2
-        x: 48
-        y: 24
+        x: 61
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1868,8 +1868,8 @@ TextureImporter:
       name: Factory_Tileset_67
       rect:
         serializedVersion: 2
-        x: 56
-        y: 24
+        x: 71
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1889,8 +1889,8 @@ TextureImporter:
       name: Factory_Tileset_68
       rect:
         serializedVersion: 2
-        x: 64
-        y: 24
+        x: 81
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1910,8 +1910,8 @@ TextureImporter:
       name: Factory_Tileset_69
       rect:
         serializedVersion: 2
-        x: 72
-        y: 24
+        x: 91
+        y: 31
         width: 8
         height: 8
       alignment: 0
@@ -1931,8 +1931,8 @@ TextureImporter:
       name: Factory_Tileset_70
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 1
+        y: 21
         width: 8
         height: 8
       alignment: 0
@@ -1952,8 +1952,8 @@ TextureImporter:
       name: Factory_Tileset_71
       rect:
         serializedVersion: 2
-        x: 8
-        y: 16
+        x: 11
+        y: 21
         width: 8
         height: 8
       alignment: 0
@@ -1973,8 +1973,8 @@ TextureImporter:
       name: Factory_Tileset_72
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 21
+        y: 21
         width: 8
         height: 8
       alignment: 0
@@ -1994,8 +1994,8 @@ TextureImporter:
       name: Factory_Tileset_73
       rect:
         serializedVersion: 2
-        x: 24
-        y: 16
+        x: 31
+        y: 21
         width: 8
         height: 8
       alignment: 0
@@ -2015,8 +2015,8 @@ TextureImporter:
       name: Factory_Tileset_74
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 41
+        y: 21
         width: 8
         height: 8
       alignment: 0
