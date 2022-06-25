@@ -7,7 +7,6 @@ public class MainCamera : MonoBehaviour {
     #region Fields ================================================================================
     Camera cam;
     private float size = 9f;
-    [SerializeField] Text text;
 	#endregion
 	
     #region Unity Methods ================================================================================
@@ -16,16 +15,14 @@ public class MainCamera : MonoBehaviour {
         cam.orthographicSize = size;
     }
 
-    void Update() {
-        TestFov();
-    }
     #endregion
 
     #region Public Methods ================================================================================
     #endregion
 
     #region Private Methods ================================================================================
-    private void TestFov() {
+    /*  FOV testing function
+     * private void TestFov() {
         if (Input.GetKeyDown(KeyCode.I)) {
             cam.orthographicSize += 0.1f;
             if (text != null) text.text = "Size: " + cam.orthographicSize;
@@ -34,6 +31,6 @@ public class MainCamera : MonoBehaviour {
             cam.orthographicSize -= 0.1f;
             if (text != null) text.text = "Size: " + cam.orthographicSize;
         }
-    }
+    }*/
 	#endregion
 }

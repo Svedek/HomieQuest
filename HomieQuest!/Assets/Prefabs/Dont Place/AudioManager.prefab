@@ -1,0 +1,191 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &595459291173011312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595459291173011326}
+  - component: {fileID: 595459291173011313}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &595459291173011326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595459291173011312}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -64.70586, y: 0.29745802, z: -360.3077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &595459291173011313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595459291173011312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0fb7d5ade026c4d8421a4c7763d362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfx:
+  - name: Jump1
+    clip: {fileID: 8300000, guid: 4df0c967bfd356f49aefa72198dbc717, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Jump2
+    clip: {fileID: 8300000, guid: 240a4d1c0ccdfdc4ca35d90806e85881, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: ChakramJump
+    clip: {fileID: 8300000, guid: c0fbee90b349b7341a599ef52496a8d7, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: PlayerHitGround
+    clip: {fileID: 8300000, guid: 768334b7bcf66d847af57cb48e0dfdd0, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: PlayerWalk =EMPTY
+    clip: {fileID: 0}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: PowerUp
+    clip: {fileID: 8300000, guid: ed9c73f0ab68e7a459dc0c70d1939bc2, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: ChakramThrow
+    clip: {fileID: 8300000, guid: 1c4454c1456f1174bafee131238fda81, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: ChakramRecharged
+    clip: {fileID: 8300000, guid: 799bfcc7a698a654f83d9bf49c8bc7b6, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Dash
+    clip: {fileID: 8300000, guid: 0335891a0d428504287ccd3d15563279, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: CheckpointSet
+    clip: {fileID: 8300000, guid: e9fad19b0d2f0674cbfdd155c40755af, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: LevelFinish
+    clip: {fileID: 8300000, guid: 5a548ca28ce38b641b6c96f35161c42f, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Swing
+    clip: {fileID: 8300000, guid: cff13d8b5b281c74bb9318d97bf94673, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+  - name: SwingHitEnemy
+    clip: {fileID: 8300000, guid: 9d7a2ebc1e9c6784b82bb9b4ff6a7c1f, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: SwingHitSpikes
+    clip: {fileID: 8300000, guid: 21ee7035764801d48a7000aa07a3e874, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: 62f29a7a4cc8b4949b35d93a00cc70d5, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: ad7c8f21124bbc242842cb28cb82211b, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 07ae384be3270904691b1ebd05bf1816, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: HealthPickup
+    clip: {fileID: 8300000, guid: c6b8dec56ee185146833067abe37a4a2, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: MaxHealthPickup
+    clip: {fileID: 8300000, guid: 82a23f68da004394ca79e35ec2c3b7f0, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: LifePickup
+    clip: {fileID: 8300000, guid: a5e75074012758640a0a3154484117d2, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  music:
+  - name: TitleSong
+    clip: {fileID: 8300000, guid: 3d8055cb04aad7e42a8fcecc9b466f70, type: 3}
+    audioGroup: {fileID: -583081531563908507, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+  - name: Seg1Song
+    clip: {fileID: 8300000, guid: f5789749697380446813ad8ae84a8071, type: 3}
+    audioGroup: {fileID: -583081531563908507, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+  - name: Seg2Song
+    clip: {fileID: 8300000, guid: 34b5f9c94e97afa48af5739f147c6004, type: 3}
+    audioGroup: {fileID: -583081531563908507, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+  - name: Seg2SongNoIntro
+    clip: {fileID: 8300000, guid: 77e0d40c2fc906c4fb3ff16b333b59d7, type: 3}
+    audioGroup: {fileID: -583081531563908507, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 1

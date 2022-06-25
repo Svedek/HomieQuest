@@ -12,8 +12,7 @@ public class PlayerSwingChecker : MonoBehaviour {
     private int swingTimer = 0, position = 0; // pos - 0 is right, 1 is up, 2 is left, 3 is down
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         player = gameObject.GetComponentInParent<PlayerController>();
         collider2d = gameObject.GetComponent<CircleCollider2D>();
     }
@@ -30,6 +29,11 @@ public class PlayerSwingChecker : MonoBehaviour {
         EnemyLifeform enemy = collision.gameObject.GetComponent<EnemyLifeform>();
         if (enemy != null || collision.gameObject.layer == 9) {
             player.SwingConnect(enemy, position);
+        } else {
+            CageHolder holder = collision.gameObject.GetComponent<CageHolder>();
+            if(holder != null) {
+                holder.Hit();
+            }
         }
     }
 

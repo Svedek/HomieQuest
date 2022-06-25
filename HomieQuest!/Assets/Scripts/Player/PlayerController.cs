@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour {
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
-
     void Start() {
+
         // Set initial checkpoint
         lastCheckpoint = transform.position;
 
@@ -82,8 +82,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (state == PlayerState.Main) // if not dashing nor stunned
         {
             // Check for Horizontal input
@@ -135,7 +134,7 @@ public class PlayerController : MonoBehaviour {
 
         if (invinTimer > 0) --invinTimer;
         if (swingTimer > 0) --swingTimer;
-        if (chakramTimer > 0) --chakramTimer;
+        if (chakramTimer > 0) if(--chakramTimer == 0) AudioManager.Instance.PlaySFX("ChakramRecharged"); ;
     }
     #endregion
 
@@ -144,17 +143,21 @@ public class PlayerController : MonoBehaviour {
     public void HealthPickup(int healthGain) {
         health = Mathf.Min(health + healthGain, maxHealth);
         UIControl.SetHelthUI(health);
+        AudioManager.Instance.PlaySFX("HealthPickup");
     }
     public void HealthMaxPickup() {
         maxHealth = maxHealth < 21 ? maxHealth + 2 : maxHealth;
         UIControl.SetHeartsUI(maxHealth/2);
         UIControl.SetHelthUI(health = maxHealth);
+        AudioManager.Instance.PlaySFX("MaxHealthPickup");
     }
     public void LifePickup() {
         UIControl.SetLivesUI(++lives);
+        AudioManager.Instance.PlaySFX("LifePickup");
     }
     public void DamagePickup(float damageGain) {
         swingDamage += damageGain;
+        AudioManager.Instance.PlaySFX("PowerUp");
     }
     public void UnlockDash() {
         dashUnlocked = dashAvailable = true;
@@ -171,6 +174,7 @@ public class PlayerController : MonoBehaviour {
         dashAvailable = dashUnlocked;
         doubleJumpAvailable = doubleJumpUnlocked;
         animator.SetBool("Grounded", true); // Set animator grounded
+        AudioManager.Instance.PlaySFX("PlayerHitGround");
     }
 
     public void LeaveGround() {
@@ -207,7 +211,8 @@ public class PlayerController : MonoBehaviour {
         if (enemy != null) { // if collision was an enemy, apply damage
             // Apply hit to enemy
             enemy.HitEnemy(swingDamage, KBDir, swingKnockback);
-        }
+            AudioManager.Instance.PlaySFX("SwingHitEnemy");
+        } else AudioManager.Instance.PlaySFX("SwingHitSpikes");
     }
 
     public void HitPlayer(int damage, Vector2 KBDir, float knockbackForce) {
@@ -227,6 +232,7 @@ public class PlayerController : MonoBehaviour {
 
             // Check mortality
             if (health <= 0) Die();
+            else AudioManager.Instance.PlaySFX("PlayerHit");
         }
         
     }
@@ -238,6 +244,7 @@ public class PlayerController : MonoBehaviour {
             jumpTimer = Mathf.Max(jumpTime, jumpTimer);
             dashAvailable = dashUnlocked;
             doubleJumpAvailable = doubleJumpUnlocked;
+            AudioManager.Instance.PlaySFX("ChakramJump");
             return false;
         }
         return true;
@@ -248,6 +255,8 @@ public class PlayerController : MonoBehaviour {
     public bool SetCheckpoint(Vector3 newCheckpoint) { // returns true if checkpoint was set to new location
         bool ret = newCheckpoint != lastCheckpoint;
         lastCheckpoint = newCheckpoint;
+        if (ret)
+            AudioManager.Instance.PlaySFX("CheckpointSet");
         return ret;
     }
 
@@ -256,15 +265,21 @@ public class PlayerController : MonoBehaviour {
         if (doubleJumpUnlocked) ++powerUps;
         if (dashUnlocked) ++powerUps;
         if (chakramUnlocked) ++powerUps;
-        DataManager.Data newData = new DataManager.Data(-1,maxHealth,lives,powerUps);
 
+        AudioManager.Instance.PlaySFX("LevelFinish");
+
+        DataManager.Data newData = new DataManager.Data(-1,maxHealth,lives,powerUps);
         DataManager.Instance.SaveData(newData);
+    }
+
+    public void HitRespawnHazard(int damage) {
+        HitPlayer(damage, Vector2.down, 0);
+        Respawn();
     }
     #endregion
 
     #region Private Methods ================================================================================
-    private void BasicAttack(float vertical)
-    {
+    private void BasicAttack(float vertical) {
         if (state > PlayerState.Main) return;
         if (swingTimer > 0) return; // Don't attack if on cooldown
         if (vertical > 0) // Swing Up
@@ -293,10 +308,11 @@ public class PlayerController : MonoBehaviour {
 
         }
         swingTimer = swingCooldown;
+        // Play audio
+        AudioManager.Instance.PlaySFX("Swing");
     }
 
-    private void pogo()
-    {
+    private void pogo() {
         jumpTimer = Mathf.Max(jumpTime / 2, jumpTimer);
         dashAvailable = dashUnlocked;
         doubleJumpAvailable = doubleJumpUnlocked;
@@ -307,20 +323,19 @@ public class PlayerController : MonoBehaviour {
     private void Jump()
     {
         if (state > PlayerState.Main) return;
-        if (grounded) // grounded jump
-        {
+        if (grounded) { // grounded jump
             jumpTimer = jumpTime;
-        } else if (doubleJumpAvailable) // double jump
-        {
+            AudioManager.Instance.PlaySFX("Jump1");
+        } else if (doubleJumpAvailable) { // double jump
             jumpTimer = jumpTime;
             doubleJumpAvailable = false;
             feetParticles.Play();
+            AudioManager.Instance.PlaySFX("Jump2");
         }
     }
 
     // Dashes if dash is available and not on cooldown
-    private void Dash()
-    {
+    private void Dash() {
         if (dashAvailable && dashCooldown <= 0 && state < PlayerState.Dash) {
             // Get dashDir
             float temp = 1f;
@@ -336,6 +351,8 @@ public class PlayerController : MonoBehaviour {
             // Set State and enable trail
             SetState(PlayerState.Dash);
             trailRenderer.emitting = true;
+
+            AudioManager.Instance.PlaySFX("Dash");
         }
     }
 
@@ -361,6 +378,8 @@ public class PlayerController : MonoBehaviour {
 
             chakramTimer = chakramTime;
             chakramAvailable = false;
+
+            AudioManager.Instance.PlaySFX("ChakramThrow");
         }
     }
     private void Stun()
@@ -376,17 +395,21 @@ public class PlayerController : MonoBehaviour {
         SetState(PlayerState.Dead);
         respawnTimer = respawnTime;
         UIControl.SetLivesUI(--lives);
+        health = maxHealth;
+        AudioManager.Instance.PlaySFX("PlayerDeath");
     }
     private void DeathRespawn() {
         if (lives <= 0) { // Truly perish
-            if (GameStateManager.Instance.CurrentGameState != GameState.Victory) GameStateManager.Instance.SetState(GameState.Lose);
+            if (GameStateManager.Instance.CurrentGameState != GameState.Victory) {
+                GameStateManager.Instance.SetState(GameState.Lose);
+                AudioManager.Instance.PlaySFX("GameOver");
+            }
         } else { // Kind of perish
             Respawn();
         }
     }
     private void Respawn() {
         transform.position = lastCheckpoint;
-        health = maxHealth;
         UIControl.SetHelthUI(health);
         state = PlayerState.Main;
     }
