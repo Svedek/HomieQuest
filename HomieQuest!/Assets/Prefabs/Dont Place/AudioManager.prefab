@@ -164,6 +164,18 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     loop: 0
+  - name: CageBreak
+    clip: {fileID: 8300000, guid: 38cf9b4353cd04e499db368332ad69db, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: CageDamage
+    clip: {fileID: 8300000, guid: 13c02235ea15f1b47adda9c224d7e83a, type: 3}
+    audioGroup: {fileID: 6274166682669241917, guid: eaba9d4f3cf379246bb3680881e9294d, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
   music:
   - name: TitleSong
     clip: {fileID: 8300000, guid: 3d8055cb04aad7e42a8fcecc9b466f70, type: 3}

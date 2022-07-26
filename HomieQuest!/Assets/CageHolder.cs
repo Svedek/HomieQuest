@@ -26,10 +26,8 @@ public class CageHolder : MonoBehaviour {
             Destroy(cage);
             gameObject.GetComponent<SpriteRenderer>().sprite = brokenHolder;
             // Particle effect + possibly pole shake
-            AudioManager.instance.PlaySFX("CageCut");
-        } else {
-            AudioManager.instance.PlaySFX("CageDamage");
         }
+        AudioManager.instance.PlaySFX("CageDamage");
     }
         #endregion
 
