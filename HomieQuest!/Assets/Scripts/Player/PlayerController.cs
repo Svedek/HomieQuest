@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     [SerializeField] private ParticleSystem feetParticles;
     [SerializeField] private PlayerSwingChecker swingChecker;
-    [SerializeField] private UIController UIControl;
     [SerializeField] private GameObject chakramPrefab;
 
 
@@ -72,9 +71,9 @@ public class PlayerController : MonoBehaviour {
 
         // Set health and UI
         health = maxHealth;
-        UIControl.SetHelthUI(health);
-        UIControl.SetHeartsUI(maxHealth/2);
-        UIControl.SetLivesUI(lives);
+        UIController.Instance.SetHelthUI(health);
+        UIController.Instance.SetHeartsUI(maxHealth/2);
+        UIController.Instance.SetLivesUI(lives);
     }
 
     private void OnDestroy() {
@@ -142,17 +141,17 @@ public class PlayerController : MonoBehaviour {
         #region pickup/unlock  ========================================
     public void HealthPickup(int healthGain) {
         health = Mathf.Min(health + healthGain, maxHealth);
-        UIControl.SetHelthUI(health);
+        UIController.Instance.SetHelthUI(health);
         AudioManager.Instance.PlaySFX("HealthPickup");
     }
     public void HealthMaxPickup() {
         maxHealth = maxHealth < 21 ? maxHealth + 2 : maxHealth;
-        UIControl.SetHeartsUI(maxHealth/2);
-        UIControl.SetHelthUI(health = maxHealth);
+        UIController.Instance.SetHeartsUI(maxHealth/2);
+        UIController.Instance.SetHelthUI(health = maxHealth);
         AudioManager.Instance.PlaySFX("MaxHealthPickup");
     }
     public void LifePickup() {
-        UIControl.SetLivesUI(++lives);
+        UIController.Instance.SetLivesUI(++lives);
         AudioManager.Instance.PlaySFX("LifePickup");
     }
     public void DamagePickup(float damageGain) {
@@ -224,7 +223,7 @@ public class PlayerController : MonoBehaviour {
             invinTimer = invinTime;
 
             // Set UI
-            UIControl.SetHelthUI(health);
+            UIController.Instance.SetHelthUI(health);
 
             // Apply Knockback and stun
             Stun();
@@ -394,7 +393,7 @@ public class PlayerController : MonoBehaviour {
     private void Die() {
         SetState(PlayerState.Dead);
         respawnTimer = respawnTime;
-        UIControl.SetLivesUI(--lives);
+        UIController.Instance.SetLivesUI(--lives);
         health = maxHealth;
         AudioManager.Instance.PlaySFX("PlayerDeath");
     }
@@ -410,7 +409,7 @@ public class PlayerController : MonoBehaviour {
     }
     private void Respawn() {
         transform.position = lastCheckpoint;
-        UIControl.SetHelthUI(health);
+        UIController.Instance.SetHelthUI(health);
         state = PlayerState.Main;
     }
 

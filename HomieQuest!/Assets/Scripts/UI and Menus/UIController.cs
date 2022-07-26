@@ -11,8 +11,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject victoryMenu;
     [SerializeField] private GameObject victoryMenuBG;
 
+    public static UIController Instance { get; private set; }
 
     private void Awake() {
+        Instance = this;
         healthController = GetComponent<UIHealthController>();
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
