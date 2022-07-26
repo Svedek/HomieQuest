@@ -51,8 +51,10 @@ public class UIController : MonoBehaviour
         victoryMenuBG.SetActive(newGameState == GameState.Victory);
     }
 
-    
 
+    public void Resume() {
+        GameStateManager.Instance.SetState(GameState.Gaming);
+    }
     public void NextLevel() {
         LevelManager.Instance.ToNextLevel();
     }
