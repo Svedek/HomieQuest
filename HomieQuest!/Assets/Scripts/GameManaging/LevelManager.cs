@@ -7,6 +7,12 @@ public class LevelManager : MonoBehaviour {
     private int mainMenu = 0;
     private int tutorial = 1;
 
+    public static LevelManager Instance { get; private set; }
+
+    private void Awake() {
+        Instance = this; // I know this is bad lol
+    }
+
     private void Start() {
         PlayProperSongLol();
     }

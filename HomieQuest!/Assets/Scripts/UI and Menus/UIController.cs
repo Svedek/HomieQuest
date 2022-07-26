@@ -6,6 +6,7 @@ public class UIController : MonoBehaviour
     private UIHealthController healthController;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject pauseMenuBG;
+    [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject loseMenu;
     [SerializeField] private GameObject loseMenuBG;
     [SerializeField] private GameObject victoryMenu;
@@ -39,6 +40,7 @@ public class UIController : MonoBehaviour
         // Paused
         pauseMenu.SetActive(newGameState == GameState.Paused);
         pauseMenuBG.SetActive(newGameState == GameState.Paused);
+        if (newGameState != GameState.Paused) settingsMenu.SetActive(false);
 
         // Defeat
         loseMenu.SetActive(newGameState == GameState.Lose);
@@ -47,5 +49,17 @@ public class UIController : MonoBehaviour
         // Victory
         victoryMenu.SetActive(newGameState == GameState.Victory);
         victoryMenuBG.SetActive(newGameState == GameState.Victory);
+    }
+
+    
+
+    public void NextLevel() {
+        LevelManager.Instance.ToNextLevel();
+    }
+    public void Exit() {
+        LevelManager.Instance.ToMainMenu();
+    }
+    public void Retry() {
+        LevelManager.Instance.ReloadLevel();
     }
 }

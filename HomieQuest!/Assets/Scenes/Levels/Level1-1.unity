@@ -108565,6 +108565,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayUI
       objectReference: {fileID: 0}
+    - target: {fileID: 9007729752949282692, guid: d0225b32cb96e7c4598117bd852ab838, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007729752949282692, guid: d0225b32cb96e7c4598117bd852ab838, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 384
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007729752949282746, guid: d0225b32cb96e7c4598117bd852ab838, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0225b32cb96e7c4598117bd852ab838, type: 3}
 --- !u!1001 &1882145289

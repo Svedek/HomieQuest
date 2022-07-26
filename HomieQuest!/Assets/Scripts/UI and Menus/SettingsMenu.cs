@@ -60,5 +60,6 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         //backgroundRect.sizeDelta = new Vector2(resolution.width, resolution.height);
     }
-    
+
+    public void SetHintVisibility(bool visibility) => HintManager.Instance.SetHintVisability(visibility);
 }
